@@ -1,0 +1,59 @@
+@charset "utf-8";
+
+
+
+/*スライドショーのキーフレーム設定
+---------------------------------------------------------------------------*/
+@keyframes slide1 {
+	0% {opacity: 1;}
+	25%{opacity: 1;}
+	35%{opacity: 0;}
+	90% {opacity: 0;}
+	100% {opacity: 1;}
+}
+@keyframes slide2 {
+	0% {opacity: 0;}
+	25% {opacity: 0;}
+	35% {opacity: 1;}
+	60% {opacity: 1;}
+	70% {opacity: 0;}
+	100% {opacity: 0;}
+}
+@keyframes slide3 {
+	0% {opacity: 0;}
+	60% {opacity: 0;}
+	70% {opacity: 1;}
+	90% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+
+/*スライドショーの設定
+---------------------------------------------------------------------------*/
+/*スライドショーのブロック全体*/
+.mainimg {
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.slide1,.slide2,.slide3 {
+	width: 100%;height: auto;
+	animation-duration: 12s;	/*実行する時間。「s」は秒の事。*/
+	animation-iteration-count:infinite;		/*実行する回数。「infinite」は無限に繰り返す意味。*/
+	position: absolute;left:0px;top:0px;
+	animation-fill-mode: both;
+	animation-delay: 1s;
+}
+/*１枚目*/
+.slide1 {
+	position: relative;
+	animation-name: slide1;	/*上で設定しているキーフレーム（keyframes）の名前*/
+}
+/*２枚目*/
+.slide2 {
+	animation-name: slide2;	/*上で設定しているキーフレーム（keyframes）の名前*/
+}
+/*３枚目*/
+.slide3 {
+	animation-name: slide3;	/*上で設定しているキーフレーム（keyframes）の名前*/
+}

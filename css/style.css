@@ -1,0 +1,617 @@
+@charset "utf-8";
+
+
+
+
+/*リセットCSS（sanitize.css）の読み込み
+---------------------------------------------------------------------------*/
+@import url("https://unpkg.com/sanitize.css");
+
+/*Font Awesomeの読み込み
+---------------------------------------------------------------------------*/
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
+
+/*テンプレート専用cssファイルの読み込み
+---------------------------------------------------------------------------*/
+@import url("animation.css");
+@import url("slide.css");
+
+
+
+
+/*全体の設定
+---------------------------------------------------------------------------*/
+html,body {
+	margin: 0;padding: 0;
+	font-size: 13px;	/*基準となるフォントサイズ。下の方にある「画面幅900px以上」で基準を大きなサイズに再設定しています。*/
+	height: 100%;
+}
+
+body {
+	font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;	/*フォント種類*/
+	-webkit-text-size-adjust: none;
+	background: #f7f7f7;	/*背景色*/
+	color: #333;		/*全体の文字色*/
+	line-height: 2;		/*行間*/
+}
+
+/*リセット*/
+figure {margin: 0;}
+dd {margin: 0;}
+nav {margin: 0;padding: 0;}
+
+/*table全般の設定*/
+table {border-collapse:collapse;}
+
+/*画像全般の設定*/
+img {border: none;max-width: 100%;height: auto;vertical-align: middle;}
+
+/*videoタグ*/
+video {max-width: 100%;}
+
+/*iframeタグ*/
+iframe {width: 100%;}
+
+/*section全般の設定*/
+section + section {
+	padding-top: 50px;	/*sectionの間に空けるスペース*/
+}
+
+
+/*リンクテキスト全般の設定
+---------------------------------------------------------------------------*/
+a {
+	color: #333;	/*文字色*/
+	transition: 0.3s;
+}
+
+a:hover {
+	opacity: 0.6;	/*マウスオン時に60%の透明度にする*/
+}
+
+
+/*containerブロック
+---------------------------------------------------------------------------*/
+#container {
+	height: 100%;
+	display: flex;					/*flexボックスを使う指定*/
+	flex-direction: column;			/*子要素を縦並びにする*/
+	justify-content: space-between;	/*並びかたの種類の指定*/
+}
+
+
+/*header（ロゴなどが入った最上段のブロック）
+---------------------------------------------------------------------------*/
+/*ヘッダーブロック*/
+header {
+	display: flex;			/*flexボックスを使う指定*/
+	align-items: center;	/*垂直揃えの指定。上下中央に配置されるように。*/
+	padding: 5px 20px;		/*上下、左右へのヘッダー内の余白*/
+	background: #111;		/*背景色*/
+	color: #fff;			/*文字色*/
+}
+
+/*ヘッダーのリンクテキストの文字色*/
+header a {
+	color: #fff;
+}
+
+/*ロゴ画像*/
+header #logo img {display: block;}
+header #logo {
+	margin: 0 0 0 50px;	/*上、右、下、左へ空けるスペース*/
+	order: 1;		/*表示させる順番。「#menubar_hdr」「#logo」「#header-icon」それぞれに指定しており、数字の「小さな順」に左から並びます。*/
+	width: 200px;	/*画像の幅*/
+}
+
+
+/*header内の右側に並んでいるアイコン類。FontAwesomeを使用しています。
+---------------------------------------------------------------------------*/
+/*アイコンを囲むブロック*/
+#header-icon {
+	order: 2;			/*表示させる順番。「#menubar_hdr」「#logo」「#header-icon」それぞれに指定しており、数字の「小さな順」に左から並びます。*/
+	font-size: 18px;	/*アイコンのサイズ。文字サイズで指定します。*/
+	margin-left: auto;	/*右側に寄せる為*/
+}
+
+/*１個あたりのアイコン設定*/
+#header-icon i {
+	padding: 5px;	/*余白*/
+}
+
+
+/*３本バー（ハンバーガー）アイコン設定
+---------------------------------------------------------------------------*/
+/*３本バーを囲むブロック*/
+#menubar_hdr {
+	position: fixed;z-index: 101;
+	cursor: pointer;
+	left: 10px;			/*左からの配置場所指定*/
+	top: 3px;			/*上からの配置場所指定*/
+	padding: 10px 8px;	/*ブロック内の余白*/
+	width: 40px;		/*幅（３本バーが出ている場合の幅になります）*/
+	height: 40px;		/*高さ*/
+	display: flex;					/*flexボックスを使う指定*/
+	flex-direction: column;			/*子要素（３本バー）を縦並びにする*/
+	justify-content: space-between;	/*並びかたの種類の指定*/
+	order: 0;			/*表示させる順番。「#menubar_hdr」「#logo」「#header-icon」それぞれに指定しており、数字の「小さな順」に左から並びます。*/
+	background: #111;	/*背景色*/
+}
+
+/*バー１本あたりの設定*/
+#menubar_hdr span {
+	display: block;
+	transition: 0.3s;	/*アニメーションにかける時間。0.3秒。*/
+	border-top: 2px solid #fff;	/*線の幅、線種、色*/
+}
+
+/*×印が出ている状態の設定。※１本目および２本目のバーの共通設定。*/
+#menubar_hdr.ham span:nth-of-type(1),
+#menubar_hdr.ham span:nth-of-type(3) {
+	transform-origin: center center;	/*変形の起点。センターに。*/
+	width: 26px;						/*バーの幅*/
+}
+
+/*×印が出ている状態の設定。※１本目のバー。*/
+#menubar_hdr.ham span:nth-of-type(1){
+	transform: rotate(45deg) translate(6px, 7px);	/*回転45°と、X軸Y軸への移動距離の指定*/
+}
+
+/*×印が出ている状態の設定。※３本目のバー。*/
+#menubar_hdr.ham span:nth-of-type(3){
+	transform: rotate(-45deg) translate(6px, -7px);	/*回転-45°と、X軸Y軸への移動距離の指定*/
+}
+
+/*×印が出ている状態の設定。※２本目のバー。*/
+#menubar_hdr.ham span:nth-of-type(2){
+	display: none;	/*２本目は使わないので非表示にする*/
+}
+
+
+/*menubarブロック初期設定
+---------------------------------------------------------------------------*/
+#menubar {height: 0px;overflow: hidden;}
+#menubar ul {list-style: none;margin: 0;padding: 0;}
+
+
+/*小さな端末用の開閉ブロック設定
+---------------------------------------------------------------------------*/
+/*メニューブロック設定*/
+#menubar.db {
+	position: fixed;overflow: auto;z-index: 100;
+	left: 0px;top: 0px;
+	width: 180px;		/*メニューブロックの幅*/
+	height: 100%;
+	padding: 70px 0 0;	/*上、左右、下へのブロック内の余白*/
+	background: rgba(0,0,0,0.9);		/*背景色。0,0,0は黒の事で0.9は色が90%出た状態の事。*/
+	color: #fff;						/*文字色*/
+	animation: animation1 0.2s both;	/*animation.cssの、animation1を実行する。0.2sは0.2秒の事。*/
+}
+
+/*メニュー１個あたりの設定*/
+#menubar.db a {
+	color: #fff;	/*文字色*/
+}
+
+/*現在表示中のメニュー設定（current）*/
+#menubar.db li.current a {
+	background: #666;	/*背景色*/
+}
+
+
+/*メインメニュー（小さな端末、大きな端末共通設定）
+---------------------------------------------------------------------------*/
+/*メニュー１個あたりの設定*/
+#menubar li {
+	margin-bottom: 30px;	/*下に空けるスペース。メニュー同士の上下間の余白です。*/
+	font-size: 0.8em;		/*文字サイズを80%に。*/
+	letter-spacing: 0.1em;	/*文字間隔を少しだけ広くとる設定*/
+}
+#menubar a {
+	display: block;text-decoration: none;
+	text-align: center;	/*テキストを中央に*/
+	padding: 2px 5px;	/*上下、左右への余白*/
+}
+
+
+/*mainブロック設定
+---------------------------------------------------------------------------*/
+/*mainブロックの設定*/
+main {	
+	flex: 1;
+	margin: 50px;	/*ボックスの外側へ空けるスペース*/
+}
+
+/*mainブロック内のh2タグ*/
+main h2 {
+	margin: 0;
+	margin-bottom: 20px;
+	font-weight: normal;
+	border-bottom: 4px solid #eee;	/*下線の幅、線種、色。ベースカラーです。下のspanのborder-bottomと数字を合わせておく。*/
+}
+
+/*mainブロック内のh2タグに下線を引くための指定。*/
+main h2 span.uline {
+	display: inline-block;position: relative;
+	border-bottom: 4px solid #111;	/*下線の幅、線種、色。アクセントカラーです。上のmain h2と数字を合わせておく。*/
+	bottom: -4px;		/*下からの配置場所指定。上にある２つのborder-bottomと重ねる為の指定なので、数字を合わせてから冒頭にマイナスをつけて下さい。*/
+	padding: 0 20px;	/*上下、左右への余白。テキストの両脇に少し余裕をもって線を引くためです。*/
+}
+
+/*mainブロック内のh3タグ*/
+main h3 {
+	margin: 0;
+	margin-bottom: 20px;
+	font-weight: normal;
+	background: #fff;		/*背景色*/
+	border: 1px solid #eee;	/*枠線の幅、線種、色*/
+	padding: 3px 20px;		/*ボックス内の余白*/
+	border-radius: 3px;		/*角丸のサイズ*/
+}
+
+/*mainブロックのpタグ*/
+main p {
+	margin: 0 20px 30px;	/*上、左右、下へ空けるスペース*/
+}
+
+
+/*listブロック
+---------------------------------------------------------------------------*/
+/*listブロック全体を囲むブロック*/
+.list-container {
+	display: flex;		/*flexボックスを使う指定*/
+	flex-wrap: wrap;	/*折り返す指定*/
+	justify-content: space-between;	/*並びかたの種類の指定*/
+}
+
+/*１個あたりのボックス設定*/
+.list {
+	width: 48%;				/*幅。２列になります。*/
+	margin-bottom: 30px;	/*ボックス同士の上下間に空けるスペース*/
+	padding: 20px;			/*ボックス内の余白*/
+	background: #fff;		/*背景色*/
+	color: #999;			/*文字色*/
+	box-shadow: 5px 5px 20px rgba(0,0,0,0.1);	/*ボックスの影。右へ、下へ、ぼかし幅、0,0,0は黒の事で0.1は色が10%出た状態。*/
+}
+
+/*ボックス内のh4タグ*/
+.list h4 {
+	margin: 10px 0;	/*上下、左右への余白*/
+	color: #666;	/*文字色*/
+}
+.list h4 a {
+	color: #666;	/*リンクテキストの文字色*/
+}
+
+/*ボックス内のpタグ*/
+.list p {
+	margin: 0;
+	font-size: 0.8em;	/*文字サイズを80%に*/
+}
+
+
+/*フッター設定
+---------------------------------------------------------------------------*/
+footer small {font-size: 100%;}
+
+footer {
+	font-size: 0.6rem;		/*文字サイズ。remの単位についてはテンプレート内の解説をお読み下さい。*/
+	background: #111;		/*背景色*/
+	color: #fff;			/*文字色*/
+	text-align: center;		/*内容をセンタリング*/
+	padding: 10px;			/*ボックス内の余白*/
+}
+
+/*リンクテキスト*/
+footer a {color: #fff;text-decoration: none;}
+
+/*リンクテキストのマウスオン時*/
+footer a:hover {color: #fff;}
+
+/*著作部分*/
+footer .pr {display: block;}
+
+
+/*「お知らせ」ブロック
+---------------------------------------------------------------------------*/
+/*お知らせブロック*/
+#new {
+	margin: 0;
+	display: flex;		/*flexボックスを使う指定*/
+	flex-wrap: wrap;	/*折り返す指定*/
+	padding: 0 20px;	/*上下、左右へのボックス内の余白*/
+}
+
+/*日付(dt)、記事(dd)共通設定*/
+#new dt,
+#new dd {
+	padding: 5px 0;		/*上下、左右へのボックス内の余白*/
+}
+
+/*日付(dt)設定*/
+#new dt {
+	width: 8em;	/*幅。8文字(em)分。※下の「900px以上」の端末用の設定に再設定があります。*/
+}
+
+/*日付の横のマーク（共通設定）*/
+#new dt span {
+	display: none;	/*小さな端末では非表示にしておく。*/
+}
+
+/*記事(dd)設定*/
+#new dd {
+	width: calc(100% - 8em);	/*「8em」は上の「#new dt」のwidthの値です。※下の「900px以上」の端末用の設定に再設定があります。*/
+}
+
+
+
+/*btnの設定
+---------------------------------------------------------------------------*/
+/*ボタンを囲むブロック*/
+.btn {
+	text-align: center;	/*内容をセンタリング*/
+}
+
+/*ボタン*/
+.btn a,
+.btn input {
+	display: inline-block;text-decoration: none;border: none;
+	border-radius: 3px;		/*角丸のサイズ。ほんの少しだけ角が丸くなります。*/
+	padding: 10px 40px;	/*上下、左右への余白。*/
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.2);	/*ボックスの影。右へ、下へ、ぼかし幅の順。0,0,0は黒の事で0.2は色が20%出た状態。*/
+	font-size: 1rem;		/*文字サイズ。remの単位についてはテンプレート内の解説をお読み下さい。*/
+	background: #111;	/*背景色*/
+	letter-spacing: 0.1em;	/*文字間隔を少し広くする指定*/
+	color: #fff;			/*文字色*/
+	transition: 0.3s;
+}
+
+/*ボタンのマウスオン時（inputタグ使用時）*/
+.btn input:hover {
+	cursor: pointer;
+	opacity: 0.6;	/*冒頭のリンクテキストのhoverと合わせました*/
+}
+
+
+/*テーブル
+---------------------------------------------------------------------------*/
+/*テーブル１行目に入った見出し部分（※caption）*/
+.ta1 caption {
+	font-weight: bold;			/*太字に*/
+	padding: 10px 5px;			/*上下、左右へのボックス内の余白。基本的に数行下の「.ta1 th, .ta1 td」のpaddingと揃えておけばOKです。*/
+	background: #666;			/*背景色*/
+	color: #fff;				/*文字色*/
+}
+
+/*ta1テーブルブロック設定*/
+.ta1 {
+	border-top: 1px solid #ccc;	/*テーブルの一番上の線。幅、線種、色*/
+	table-layout: fixed;
+	width: 100%;
+	margin: 0 auto 30px;		/*最後の「30px」がテーブルの下に空けるスペースです*/
+}
+
+/*tr（１行分）タグ設定*/
+.ta1 tr {
+	border-bottom: 1px solid #ccc;	/*テーブルの下線。幅、線種、色*/
+}
+
+/*th（左側）、td（右側）の共通設定*/
+.ta1 th, .ta1 td {
+	padding: 10px 5px;		/*上下、左右へのボックス内の余白*。基本的に数行上の「.ta1 caption」のpaddingと揃えておけばOKです。*/
+	word-break: break-all;	/*英語などのテキストを改行で自動的に折り返す設定。これがないと、テーブルを突き抜けて表示される場合があります。*/
+}
+
+/*th（左側）のみの設定*/
+.ta1 th {
+	width: 30%;			/*幅*/
+	text-align: left;	/*左よせにする*/
+	background: #f7f7f7;	/*背景色*/
+}
+
+
+/*PAGE TOP（↑）設定
+---------------------------------------------------------------------------*/
+.pagetop-show {display: block;}
+
+/*ボタンの設定*/
+.pagetop a {
+	display: block;text-decoration: none;text-align: center;
+	position: fixed;	/*スクロールに追従しない(固定で表示)為の設定*/
+	right: 20px;		/*右からの配置場所指定*/
+	bottom: 20px;		/*下からの配置場所指定*/
+	color: #fff;		/*文字色*/
+	font-size: 1.5rem;	/*文字サイズ*/
+	background: rgba(0,0,0,0.3);	/*背景色。0,0,0は黒の事で0.3は色が30%出た状態。*/
+	width: 2em;			/*幅*/
+	line-height: 2em;	/*高さ*/
+}
+
+/*マウスオン時*/
+.pagetop a:hover {
+	background: rgba(0,0,0,0.8);	/*背景色。0,0,0は黒の事で0.8は色が80%出た状態。*/
+}
+
+
+/*その他
+---------------------------------------------------------------------------*/
+.clearfix::after {content: "";display: block;clear: both;}
+.color-theme, .color-theme a {color: #560ea0 !important;}
+.color-check, .color-check a {color: #ff5151 !important;}
+.c {text-align: center !important;}
+.ws {width: 95%;display: block;}
+.wl {width: 95%;display: block;}
+.mb30 {margin-bottom: 30px !important;}
+.look {display: inline-block;border: 1px solid #ccc;padding: 5px 20px;background: rgba(0,0,0,0.03);border-radius: 5px;margin: 5px 0;}
+.ofx {overflow-x: hidden;}
+
+
+
+
+/*---------------------------------------------------------------------------
+ここから下は画面幅430px以下の追加指定
+---------------------------------------------------------------------------*/
+@media screen and (max-width:430px) {
+
+
+/*header（ロゴなどが入った最上段のブロック）
+---------------------------------------------------------------------------*/
+/*ロゴ画像*/
+header #logo {
+	margin-left: 40px;	/*左に空けるスペース*/
+	width: 100px;		/*画像の幅*/
+}
+
+
+/*mainブロック設定
+---------------------------------------------------------------------------*/
+/*mainブロックの設定*/
+main {	
+	margin: 10px;	/*ボックスの外側へ空けるスペース*/
+}
+
+
+/*　※注意！　下の閉じカッコ　}　はこのブロックに必要なので、削除しないで下さい。　*/
+
+}
+
+
+
+
+/*---------------------------------------------------------------------------
+ここから下は画面幅900px以上の追加指定
+---------------------------------------------------------------------------*/
+@media screen and (min-width:900px) {
+
+
+/*全体の設定
+---------------------------------------------------------------------------*/
+html, body {
+	font-size: 15px;	/*基準となるフォントサイズの上書き*/
+}
+
+
+/*header（ロゴなどが入った最上段のブロック）
+---------------------------------------------------------------------------*/
+header #logo {
+	margin: 0;
+}
+
+
+/*３本バー（ハンバーガー）アイコン設定
+---------------------------------------------------------------------------*/
+/*ハンバーガーメニューを非表示にする*/
+#menubar_hdr {display: none;}
+
+
+/*menubarブロック設定
+---------------------------------------------------------------------------*/
+#menubar {
+	width: 180px;				/*メニューブロックの幅*/
+	left: 0px;top: 116px;		/*左から、上からの配置場所指定*/
+	height: calc(100% - 116px);	/*メニューブロックの高さ。上の行のtopの数値(116px)を引いた高さになります。*/
+	position: fixed;			/*スクロールしても固定表示させる設定*/
+}
+
+/*マウスオン時*/
+#menubar:hover {
+	overflow: auto;	/*高さ以上のコンテンツ量の場合に自動でスクロールバーを出します*/
+}
+
+/*現在表示中のメニュー設定（current）*/
+#menubar li.current a {
+	background: #111;	/*背景色*/
+	color: #fff;		/*文字色*/
+}
+
+
+/*mainブロック設定
+---------------------------------------------------------------------------*/
+/*mainブロックの設定*/
+main {	
+	margin: 70px 50px 100px 250px;	/*上、右、下、左へのブロックの外にとるスペース*/
+}
+
+
+/*「お知らせ」ブロック
+---------------------------------------------------------------------------*/
+/*日付(dt)設定*/
+#new dt {
+	width: 14em;	/*幅。14文字(em)分。*/
+	display: flex;	/*flexボックスを使う指定*/
+	justify-content: space-between;	/*日付とアイコンをそれぞれ端に寄せる*/
+}
+
+/*日付の横のマーク（共通設定）*/
+#new dt span {
+	display: inline-block;	/*表示させる*/
+	width: 6em;				/*幅。6文字(em)分。*/
+	background: #999;		/*背景色*/
+	color: #fff;			/*文字色*/
+	font-size: 0.9em;		/*文字サイズを90%に。*/
+	text-align: center;		/*文字をセンタリング*/
+	border-radius: 3px;		/*角を少しだけ丸くする*/
+	margin-right: 1.2em;	/*アイコンの右側に空けるスペース*/
+	align-self: flex-start;	/*高さを間延びさせない指定*/
+	line-height: 1.5;		/*行間を少し狭く*/
+	position: relative;top: 0.4em;	/*上下の配置バランスの微調整*/
+}
+
+/*bg1設定。サンプルテンプレートでは「サービス」と書いてあるマーク*/
+#new dt span.icon-bg1 {
+	background: #111;	/*背景色*/
+}
+
+/*記事(dd)設定*/
+#new dd {
+	width: calc(100% - 14em);	/*「14em」は上の「#new dt」のwidthの値です。*/
+}
+
+
+/*テーブル
+---------------------------------------------------------------------------*/
+/*テーブル１行目に入った見出し部分（※caption）*/
+.ta1 caption {
+	padding: 5px 15px;		/*上下、左右へのボックス内の余白*/
+}
+
+/*th（左側）、td（右側）の共通設定*/
+.ta1 th, .ta1 td {
+	padding: 20px 15px;		/*上下、左右へのボックス内の余白*/
+}
+
+/*th（左側）のみの設定*/
+.ta1 th {
+	width: 20%;		/*幅*/
+}
+
+
+/*その他
+---------------------------------------------------------------------------*/
+.ws {width: 48%;display: inline;}
+
+
+/*　※注意！　下の閉じカッコ　}　はこのブロックに必要なので、削除しないで下さい。　*/
+
+}
+
+
+
+
+/*---------------------------------------------------------------------------
+ここから下は画面幅1200px以上の追加指定
+---------------------------------------------------------------------------*/
+@media screen and (min-width:1200px) {
+
+
+/*listブロック
+---------------------------------------------------------------------------*/
+/*１個あたりのボックス設定*/
+.list {
+	width: 24%;		/*幅。４列になります。*/
+}
+
+
+/*　※注意！　下の閉じカッコ　}　はこのブロックに必要なので、削除しないで下さい。　*/
+
+}
