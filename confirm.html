@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>企業・ビジネスサイト向け 無料ホームページテンプレート tp_biz58</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+<header>
+
+<h1 id="logo"><img src="images/logo.png" alt="SAMPLE COMPANY"></h1>
+
+<div id="menubar_hdr">
+<span></span><span></span><span></span>
+</div>
+<!--/#menubar_hdr-->
+
+<div id="header-icon">
+<a href="#"><i class="fab fa-twitter"></i></a>
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-youtube"></i></a>
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+</div>
+<!--/#header-icon-->
+
+</header>
+
+<main>
+
+<section>
+
+<h2>Contact</h2>
+
+<!-- フォームの情報はここからです -->
+<form name="form1" enctype="multipart/form-data" method="post" action="<?php echo $_SERVER["REQUEST_URI"];?>">
+<input type="hidden" name="mode" value="confirm">
+<table class="ta1">
+<caption>確認画面</caption>
+<!-- 入力／確認 -->
+<tr>
+<th width="150">お名前</th>
+<td>
+<input type="hidden" name="item1" value="?php echo $form["item1>
+<?php echo $form["item1"];?>
+</td>
+</tr>
+<tr>
+<th width="150">メールアドレス</th>
+<td>
+<input type="hidden" name="item2" value="<?php echo $form["item2"];?>">
+<?php echo $form["item2"];?>
+</td>
+</tr>
+<tr>
+<th>お問い合わせ内容</th>
+<td>
+<input type="hidden" name="item3" value="<?php echo $form["item3"]; ?>">
+<?php echo nl2br($form["item3"]);?>
+</td>
+</tr>
+</table>
+
+<p class="btn">
+<input type="submit" value="送信する">
+&nbsp;
+<input type="button" value="戻る" onClick="document.form1.mode.value='reinput';document.form1.submit()">
+</p>
+
+</form>
+<!-- フォームの情報はここまでです -->
+
+</section>
+
+</main>
+
+<div id="menubar">
+
+<!--メインメニュー-->
+<nav>
+<ul>
+<li><a href="index.html">HOME</a></li>
+<li><a href="comment.html">COMMENT</a></li>
+<li class="current"><a href="form.html">CONTACT</a></li>
+</ul>
+</nav>
+
+</div>
+<!--/#menubar-->
+
+<footer>
+<small>Copyright&copy; <a href="index.html">YAMAZAKI.K</a> All Rights Reserved.</small>
+<span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+</footer>
+
+</div>
+<!--/#container-->
+
+<!--jQueryの読み込み-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!--このテンプレート専用のスクリプト-->
+<script src="js/main.js"></script>
+
+<!--ページの上部へ戻るボタン-->
+<div class="pagetop"><a href="#"><i class="fas fa-angle-double-up"></i></a></div>
+
+</body>
+</html>
